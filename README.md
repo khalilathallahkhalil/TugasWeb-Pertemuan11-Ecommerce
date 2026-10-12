@@ -1,6 +1,8 @@
-# Tugas Web Pertemuan 9 - Setup Laravel
+# Tugas Web Pertemuan 11 - E-Commerce System
 
-Proyek ini merupakan tugas mata kuliah Pemrograman Web yang berfokus pada langkah awal inisialisasi, konfigurasi, dan penyiapan (*setup*) *framework* PHP **Laravel**. Proyek ini menyajikan struktur aplikasi dasar Laravel lengkap dengan konfigurasi lingkungan (*environment*), routing, controller, serta tampilan antarmuka (*view*).
+Proyek ini merupakan kelanjutan dari materi Pemrograman Web yang berfokus pada pengembangan aplikasi **E-Commerce** berbasis **Laravel**. 
+
+Aplikasi ini dirancang untuk mensimulasikan sistem toko online, mencakup pengelolaan katalog produk (CRUD Produk), kategori produk, keranjang belanja (*shopping cart*), hingga penanganan alur transaksi dasar (*checkout*) dan manajemen inventoris.
 
 ---
 
@@ -12,17 +14,20 @@ Proyek ini dibangun menggunakan teknologi dan pustaka berikut:
 - **[Laravel Framework](https://laravel.com/)** (v10.x / v11.x)
 - **[Composer](https://getcomposer.org/)** - Dependency Manager untuk PHP
 - **[MySQL / MariaDB](https://www.mysql.com/)** - Database Relasional
-- **[Blade Engine](https://laravel.com/docs/master/blade)** - Template engine bawaan Laravel
-- **[Bootstrap / Tailwind CSS](https://tailwindcss.com/)** *(opsional/sesuai setup)* - Styling UI
+- **[Eloquent ORM](https://laravel.com/docs/eloquent)** - Object-Relational Mapping & Relasi Tabel (One-to-Many / Many-to-Many)
+- **[Blade Engine](https://laravel.com/docs/blade)** - Template engine untuk tampilan antarmuka
+- **[Bootstrap / Tailwind CSS](https://getbootstrap.com/)** - Styling UI responsif untuk e-commerce
 
 ---
 
 ## ✨ Fitur Utama
 
-- **Inisialisasi Project Laravel**: Struktur standar proyek Laravel yang siap dikembangkan.
-- **Konfigurasi Environment**: Pengaturan koneksi database dan environment key melalui `.env`.
-- **Routing & Controller**: Penanganan rute URL utama dan logika aplikasi sederhana.
-- **Desain Blade Template**: Tampilan antarmuka yang bersih dan responsif berbasis Blade.
+- **Katalog Produk**: Menampilkan daftar produk dengan harga, deskripsi, stok, dan gambar pendukung.
+- **Manajemen Kategori**: Pengelompokan produk berdasarkan kategori tertentu.
+- **Keranjang Belanja (Shopping Cart)**: Fitur untuk menambahkan, memperbarui jumlah, dan menghapus item produk sebelum dibeli.
+- **Manajemen Produk (CRUD Admin)**: Pengelolaan data produk (tambah produk baru, edit stok/harga, hapus produk).
+- **Upload File / Gambar**: Penanganan penyimpanan file gambar produk ke dalam sistem/storage.
+- **Simulasi Checkout**: Alur transaksi pemesanan produk sederhananya.
 
 ---
 
@@ -30,9 +35,9 @@ Proyek ini dibangun menggunakan teknologi dan pustaka berikut:
 
 *(Unggah gambar screenshot aplikasi Anda ke folder `public/img/` atau repositori GitHub, lalu sesuaikan path gambar di bawah ini)*
 
-| Halaman Utama / Landing Page | Halaman / Fitur Lainnya |
+| Katalog Produk / Home | Keranjang Belanja / Detail Produk |
 | :---: | :---: |
-| ![Screenshot Home](public/img/screenshot-home.png) | ![Screenshot Detail](public/img/screenshot-detail.png) |
+| ![Screenshot Catalog](public/img/screenshot-catalog.png) | ![Screenshot Cart](public/img/screenshot-cart.png) |
 
 ---
 
@@ -41,24 +46,29 @@ Proyek ini dibangun menggunakan teknologi dan pustaka berikut:
 Berikut adalah gambaran ringkas struktur folder utama pada proyek ini:
 
 ```text
-TugasWeb-Pertemuan9-SetupLaravel/
+TugasWeb-Pertemuan11-Ecommerce/
 ├── app/
 │   ├── Http/
-│   │   ├── Controllers/   # Logic controller aplikasi
-│   │   └── Middleware/    # Middleware HTTP
-│   └── Models/            # Model Eloquent ORM
-├── bootstrap/             # Script inisialisasi & autoloader
-├── config/                # Berkas konfigurasi aplikasi
+│   │   ├── Controllers/
+│   │   │   ├── ProductController.php  # Controller katalog & CRUD produk
+│   │   │   ├── CartController.php     # Controller kelola keranjang belanja
+│   │   │   └── OrderController.php    # Controller alur checkout/pesanan
+│   │   └── Middleware/
+│   └── Models/
+│       ├── Product.php                # Model Eloquent Produk
+│       ├── Category.php               # Model Eloquent Kategori
+│       └── Order.php                  # Model Eloquent Transaksi/Pesanan
 ├── database/
-│   ├── migrations/        # Skema tabel database
-│   └── seeders/           # Data dummy awal
-├── public/                # File publik (index.php, CSS, JS, Gambar)
+│   ├── migrations/                    # Skema tabel products, categories, orders
+│   └── seeders/                       # Data dummy sampel produk & kategori
+├── public/
+│   └── storage/                       # Symlink folder gambar produk
 ├── resources/
-│   ├── views/             # File template Blade (.blade.php)
-│   ├── css/               # Asset CSS
-│   └── js/                # Asset JavaScript
+│   └── views/
+│       ├── products/                  # Template Blade produk (index, show, create, edit)
+│       └── cart/                      # Template Blade keranjang belanja
 ├── routes/
-│   └── web.php            # Definisi rute web utama
-├── .env.example           # Template variabel lingkungan
-├── composer.json          # Dependensi PHP & package Laravel
-└── README.md              # Dokumentasi proyek
+│   └── web.php                        # Definisi rute aplikasi E-Commerce
+├── .env.example                       # Template variabel lingkungan
+├── composer.json                      # Dependensi PHP & package Laravel
+└── README.md                          # Dokumentasi proyek
