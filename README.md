@@ -31,16 +31,6 @@ Proyek ini dibangun menggunakan teknologi dan pustaka berikut:
 
 ---
 
-## 📸 Screenshots
-
-*(Unggah gambar screenshot aplikasi Anda ke folder `public/img/` atau repositori GitHub, lalu sesuaikan path gambar di bawah ini)*
-
-| Katalog Produk / Home | Keranjang Belanja / Detail Produk |
-| :---: | :---: |
-| ![Screenshot Catalog](public/img/screenshot-catalog.png) | ![Screenshot Cart](public/img/screenshot-cart.png) |
-
----
-
 ## 📁 Struktur Folder Utama
 
 Berikut adalah gambaran ringkas struktur folder utama pada proyek ini:
